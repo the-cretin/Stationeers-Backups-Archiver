@@ -1,6 +1,6 @@
 @echo off
 setlocal enableDelayedExpansion
-title Stationeer's Backup Archiver 1.0 - By Spunky
+title Stationeer's Backup Archiver 1.1 - By Spunky
 
 @rem Made by: spunky
 @rem Feedback: find me on stationeers discord!
@@ -12,10 +12,10 @@ title Stationeer's Backup Archiver 1.0 - By Spunky
 @rem Description: This can be used to make compressed archives of your save files. Use In conjunction with 7-Zip Command Line Version (7za.exe) and Task Scheduler.
 
 @rem Warning: 7 Zip is a  cpu hog and compressing files is slow.  To avoid disrupting game's server performance, it is recommended to assign an alternate cpu core for this process. An Affinity Mask of "1" is applied to assign a single cpu core for the task.
-@rem The Affinity Mask must be a Hexidecimal Number.  Affinity Mask of 1 will use CPU Core 0 /or/ hyperthreaded cpus will be LOGICAL THREAD 0.  Please be aware and adjust the affinity mask if needed.
-@rem To disable this feature set AffinityMask="0"  (Warning: disabling this will hog the cpu on all available cores it is recommended to choose an unused cpu thread.)
+@rem Affinity Mask of 1 will use CPU Core 0 /or/ hyperthreaded cpus will be LOGICAL THREAD 0.  Please be aware and adjust the affinity mask if needed.
 @rem Affinity Mask Calculator: http://www.gatwick-fsg.org.uk/affinitymask.aspx?SubMenuItem=utilties
-
+@rem Once you have calculated your Affinity Mask, convert that integer to Hexadecimal by using google.
+@rem To disable this feature set AffinityMask="0"  (Warning: disabling this will hog the cpu on all available cores it is recommended to choose an unused cpu thread.)
 
 @rem Instructions: 
 
