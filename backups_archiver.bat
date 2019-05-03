@@ -1,20 +1,23 @@
 @echo off
-setlocal enableDelayedExpansion
-title Stationeer's Backup Archiver 1.2 - By Spunky
+goto main
 
-@rem Made by: spunky
+:main
+setlocal enableDelayedExpansion
+title Stationeer's Backup Archiver 1.3 - by spunky
+
+@rem Made by: spunky (for Windows)
 @rem Feedback: find me on stationeers discord!
 @rem Date-and-time-stamp sourced from: https://stackoverflow.com/a/23476347
 
 @rem =======
 @rem README:  
 
-@rem Description: This can be used to make compressed archives of your save files. Use In conjunction with 7-Zip Command Line Version (7za.exe) and Task Scheduler.
+@rem Description: This can be used to make compressed archives of your save files. Use inconjunction with 7-Zip Command Line Version (7za.exe) and Task Scheduler.
 
-@rem Warning: 7 Zip is a  cpu hog and compressing files is slow.  To avoid disrupting game's server performance, it is recommended to assign an alternate cpu core for this process. An Affinity Mask of "1" is applied to assign a single cpu core for the task.
-@rem Affinity Mask of 1 will use CPU Core 0 /or/ hyperthreaded cpus will be LOGICAL THREAD 0.  Please be aware and adjust the affinity mask if needed.
+@rem Warning: 7 Zip is a  cpu hog and compressing files is slow.  To avoid disrupting game's server performance, it is recommended to assign an alternate cpu core for this process. An Affinity Mask of "1" is applied to assign a single cpu core for the task.  The unit 1 does not mean "one core" but rather the core identified as 1... cont'd
+@rem Affinity Mask of 1 will use CPU CORE 0 /or/ hyperthreaded cpus will be LOGICAL THREAD 0.  Please be aware and adjust the affinity mask if needed.
 @rem Affinity Mask Calculator: http://www.gatwick-fsg.org.uk/affinitymask.aspx?SubMenuItem=utilties
-@rem Once you have calculated your Affinity Mask, convert that integer to Hexadecimal by using google.
+@rem Once you have calculated your Affinity Mask, convert that Integer to Hexadecimal by using google.
 @rem To disable this feature set AffinityMask="0"  (Warning: disabling this will hog the cpu on all available cores it is recommended to choose an unused cpu thread.)
 
 @rem Instructions: 
@@ -29,9 +32,11 @@ title Stationeer's Backup Archiver 1.2 - By Spunky
 
 @rem Step 3: ServerDir variable needs to point to the root of your server
 
-@rem Step 4: WorldName variable must match the name your world's name.
+@rem Step 4: WorldName variable must match your world's name
 
-@rem Step 5: Schedule this .bat file to run via Task Scheduler.
+@rem Step 5: removeDir will delete the Backup folder and all the saves if set to 1!  BE WARNED: VERIFY THE ARCHIVER TO BE WORKING BEFORE ENABLING THE DELETE FUNCTIONALITY!  This is an OPTIONAL feature that is designed to allow running the archiver on a more frequent schedule without unnecessary duplicate backups and wasted space
+
+@rem Step 6: Schedule this batch file to run via Task Scheduler
 
 @rem ENJOY!
 @rem =======
@@ -42,6 +47,7 @@ set /a AffinityMask=1
 set 7zDir="C:\7zConsole"
 set ServerDir="C:\Stationeers Server Folder"
 set WorldName="My World Name"
+set /a removeDir=0
 @rem |End of Input|
 
 
@@ -75,25 +81,41 @@ echo To: %ArchiveDir%
 echo 7z directory: !7zDir!
 echo Filename: %FileName%
 echo #Debug
-echo Please wait while the file is being compressed.  This might take a while...
+echo Please wait while the files are being compressed.  This might take a while...
 
 @rem Compressing...
 
-cd !7zDir!
+cd /d !7zDir!
 
 if %AffinityMask%==0 (
 	start /w "Zip Debug" "7za" a -mx7 %FileName% %BackupDir%
+	goto step4
 ) else (
 	start /w /affinity %AffinityMask% "Zip Debug" "7za" a -mx7 %FileName% %BackupDir%
+	goto step4
 )
 
-echo Done compressing but wait. We still need to relocate the newly made archive. Please Wait...
+:step4
+cls
+echo Done compressing but wait. 
+echo We still need to relocate the newly made archive.
+echo Please Wait...
 timeout 14
 
 echo Moving zip file to Archive folder...
 move %FileName% %ArchiveDir%
 timeout 3
 
+if %removeDir%==1 (
+	echo Deleting the backup directory...
+	del /F /Q %BackupDir%
+	timeout 5
+	goto eof
+) else (
+	goto eof
+)
+
+:eof
 cls
 echo Exiting...
 timeout 3
