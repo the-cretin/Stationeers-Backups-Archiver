@@ -1,4 +1,4 @@
-# Stationeers-Backups-Archiver v1.1 - by spunky
+# Stationeers-Backups-Archiver v1.2 - by spunky
 Compress and Archive save games for your Stationeers Server.
 
 Instructions included in the batch file.

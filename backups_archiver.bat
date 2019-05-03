@@ -1,6 +1,6 @@
 @echo off
 setlocal enableDelayedExpansion
-title Stationeer's Backup Archiver 1.1 - By Spunky
+title Stationeer's Backup Archiver 1.2 - By Spunky
 
 @rem Made by: spunky
 @rem Feedback: find me on stationeers discord!
@@ -25,11 +25,11 @@ title Stationeer's Backup Archiver 1.1 - By Spunky
 
 @rem Step 1: Adjust Affinity Mask if needed
 
-@rem Step 1: The variable 7zDir needs to match your path to the executible 7za.exe
+@rem Step 2: The variable 7zDir needs to match your path to the executible 7za.exe
 
-@rem Step 2: ServerDir variable needs to point to the root of your server
+@rem Step 3: ServerDir variable needs to point to the root of your server
 
-@rem Step 3: WorldName variable must match the name your world's name.
+@rem Step 4: WorldName variable must match the name your world's name.
 
 @rem Step 5: Schedule this .bat file to run via Task Scheduler.
 
