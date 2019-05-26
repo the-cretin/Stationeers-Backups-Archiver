@@ -3,7 +3,7 @@ goto main
 
 :main
 setlocal enableDelayedExpansion
-title Stationeer's Backup Archiver 1.3 - by spunky
+title Stationeer's Backup Archiver 1.4 - by spunky
 
 @rem Made by: spunky (for Windows)
 @rem Feedback: find me on stationeers discord!
