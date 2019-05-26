@@ -88,10 +88,10 @@ echo Please wait while the files are being compressed.  This might take a while.
 cd /d !7zDir!
 
 if %AffinityMask%==0 (
-	start /w "Zip Debug" "7za" a -mx7 %FileName% %BackupDir%
+	start /w /belownormal "Zip Debug" "7za" a -mx7 %FileName% %BackupDir%
 	goto step4
 ) else (
-	start /w /affinity %AffinityMask% "Zip Debug" "7za" a -mx7 %FileName% %BackupDir%
+	start /w /belownormal /affinity %AffinityMask% "Zip Debug" "7za" a -mx7 %FileName% %BackupDir%
 	goto step4
 )
 
